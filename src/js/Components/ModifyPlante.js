@@ -1,16 +1,17 @@
 ﻿import React from "react";
 import PlanteForm from "./PlanteForm";
-import {Route, useHistory, useParams} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 
 const ModifyPlante = ({plantes, setPlantes}) => {
     const history = useHistory();
-    const params = useParams();
+    let {planteId} = useParams();
+    let nomPlante = plantes.find(plante => plante.id === parseInt(planteId)).nom;
     return(
-        <Route path={`/plantes/${params}/modifier`}>
+        <div>
             <a href="#" onClick={() => {history.goBack()}}>&#60;</a>
-            <h2>Modifier</h2>
-            <PlanteForm plantes={plantes} />
-        </Route>
+            <h2>Modifier {nomPlante}</h2>
+            <PlanteForm plantes={plantes} onSubmit={setPlantes}/> {/*planteToModify={plantes.find(plante => plante.id === planteId)*/}
+        </div>
     );
 };
 

@@ -2,9 +2,14 @@
 import React, {useState} from "react";
 import AddPlante from './Components/AddPlante'
 import ModifyPlante from './Components/ModifyPlante'
-import SearchPlante from "./Components/SearchPlante";
+import CompositionPlanteGeneral from "./Components/CompositionPlante";
 import DeletePlanteModal from "./Components/DeletePlanteModal";
-import {BrowserRouter, Link} from "react-router-dom";
+import {BrowserRouter, Link, Switch, Route} from "react-router-dom";
+import WelcomeScreen from "./Components/WelcomeScreen";
+import getAllPlantes from "./Request/Requests"
+
+const axios = require('axios').default;
+const BASE = "http://localhost:1337";
 
 export default function App() {
 
@@ -24,26 +29,42 @@ export default function App() {
         }
     ]);
 
+    let data = async () => {
+        await axios.get(BASE + "/vegetables").then(response => {
+            setPlantes(response.data)
+        }).catch(error => console.log(error));
+    };
+    data();
+
     return (
         <div className="App">
+            <div>
+            </div>
             <BrowserRouter>
                 <ul>
+                    <li><Link to="/">Accueil</Link></li>
                     <li><Link to="/plantes/ajouter">Ajouter plante</Link></li>
-                    <li><Link to="/composition/create">Créer composition</Link></li>
+                    <li><Link to="/composition">Mes compositions</Link></li>
                 </ul>
+                
+                <Switch>
+                    <Route path="/composition">
+                        <CompositionPlanteGeneral plantes={plantes}/>
+                    </Route>
+                    <Route path="/">
+                        <WelcomeScreen plantes={plantes} />
+                    </Route>
+                </Switch>
 
-                <SearchPlante plantes={plantes}/>
-
-                <AddPlante plantes={plantes} setPlantes={setPlantes}/>
-
-                <ModifyPlante plantes={plantes} setPlantes={setPlantes}/>
-
-                <DeletePlanteModal/>
-                <div>
-                    <a href="#">&#60;</a>
-                    <h2>Créer composition</h2>
-                    <SearchPlante plantes={plantes}/>
-                </div>
+                <Route path="/plantes/ajouter">
+                    <AddPlante plantes={plantes} setPlantes={setPlantes}/>
+                </Route>
+                <Route path="/plantes/modifier/:planteId">
+                    <ModifyPlante plantes={plantes} setPlantes={setPlantes}/>
+                </Route>
+                <Route path="/plante/suprimer/:planteId">
+                    <DeletePlanteModal plantes={plantes} setPlantes={setPlantes}/>
+                </Route>
             </BrowserRouter>
         </div>
     );
