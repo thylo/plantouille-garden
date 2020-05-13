@@ -6,12 +6,12 @@ const AddPlante = ({plantes, setPlantes}) => {
     const history = useHistory();
     const onAddPlante = newPlante => {
         console.log(newPlante);
-        if (plantes.filter(plante => plante.nom === newPlante.nom.toLowerCase()).length === 0) {
+        if (plantes.filter(plante => plante.name === newPlante.name.toLowerCase()).length === 0) {
             setPlantes([
                 ...plantes,
                 {
                     id: plantes.length,
-                    nom: newPlante.nom.toLowerCase(),
+                    name: newPlante.name.toLowerCase(),
                     pros: newPlante.pros,
                     cons: newPlante.cons
                 }

@@ -14,12 +14,12 @@ const DeletePlanteModal = ({plantes, setPlantes}) => {
     
     const history = useHistory();
     let {planteId} = useParams();
-    //let nomPlante = plantes.find(plante => plante.id === parseInt(planteId)).nom;
+    let nomPlante = plantes.find(plante => plante.id === parseInt(planteId)).name;
     
     return (
         <div>
             <a href="#" onClick={() => {history.goBack()}}>X</a>
-            <h2>Suprimer {console.log(planteId, plantes)} ?</h2>
+            <h2>Suprimer {nomPlante} ?</h2>
             <p>Êtes-vous sur de vouloir suprimer cette plante ?</p>
             <ul>
                 <li><a href="#" onClick={deletePlante}>oui</a></li>

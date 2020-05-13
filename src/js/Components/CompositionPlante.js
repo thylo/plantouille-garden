@@ -14,7 +14,7 @@ const CompositionPlante = ({plantes}) => {
             <ul>
                 {
                     comps.map(comp => {
-                        return <li>{comp.nom}</li>
+                        return <li>{comp.name}</li>
                     })
                 }
             </ul>

@@ -5,7 +5,7 @@ import {useHistory, useParams} from "react-router-dom";
 const ModifyPlante = ({plantes, setPlantes}) => {
     const history = useHistory();
     let {planteId} = useParams();
-    let nomPlante = plantes.find(plante => plante.id === parseInt(planteId)).nom;
+    let nomPlante = plantes.find(plante => plante.id === parseInt(planteId)).name;
     return(
         <div>
             <a href="#" onClick={() => {history.goBack()}}>&#60;</a>

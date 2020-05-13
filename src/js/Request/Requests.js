@@ -1,8 +1,10 @@
-﻿const axios = require('axios').default;
-const BASE = "http://localhost:1337";
+﻿import axios from 'axios';
+const BASE_URL = "http://localhost:1337";
 
-const getAllPlantes = () => {
-    axios.get(BASE+"/vegetables").then(response => {return response}).catch(error => console.log(error))
+//axios async requests handler 
+const fetchData = async (path, action) => {
+    const res = await axios(BASE_URL + path);
+    action(res.data);
 };
 
-export default getAllPlantes;
+export default {fetchData};
