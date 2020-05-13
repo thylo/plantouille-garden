@@ -3,11 +3,11 @@ import PlanteSearch from "./PlanteSearch";
 import PlanteList from "./PlanteList";
 
 const SearchPlante = ({plantes}) => {
-    const [search, setSearch] = useState(plantes);
+    const [search, setSearch] = useState('');
     return (
         <div>
             <PlanteSearch pool={plantes} setPlanteToSearch={setSearch}/>
-            <PlanteList search={search}/>
+            <PlanteList plantes={plantes.filter(p=>p.name===search)} />
         </div>
     );
 };
