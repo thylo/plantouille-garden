@@ -1,6 +1,12 @@
 ﻿import React from "react";
 
-const PlanteSearch = ({setPlanteToSearch}) => {
+/**
+ * This component is a search bar for the plant list
+ * @param setPlanteSearch
+ * @returns {*}
+ * @constructor
+ */
+const PlanteSearch = ({setPlanteSearch}) => {
     const onSearchPlante = event => {
         setPlanteSearch(event.target.value)
     };

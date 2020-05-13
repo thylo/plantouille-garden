@@ -1,6 +1,13 @@
 ﻿import React from "react";
 import {useForm} from "react-hook-form";
 
+/**
+ * This component allows the admin to perform several actions on plants as create or modify them
+ * @param plantes
+ * @param onSubmit
+ * @returns {*}
+ * @constructor
+ */
 const PlanteForm = ({plantes, onSubmit}) => {
     const {register, handleSubmit} = useForm();
     
@@ -34,6 +41,6 @@ const PlanteForm = ({plantes, onSubmit}) => {
             <button>Confirmer</button>
         </form>
     );
-}
+};
 
 export default PlanteForm;

@@ -5,16 +5,17 @@ import ModifyPlante from './Components/ModifyPlante'
 import CompositionPlanteGeneral from "./Components/CompositionPlante";
 import DeletePlanteModal from "./Components/DeletePlanteModal";
 import WelcomeScreen from "./Components/WelcomeScreen";
+import PlanteDetails from "./Components/PlanteDetails";
 import {BrowserRouter, Link, Switch, Route} from "react-router-dom";
-import Requests from "./Request/Requests";
+import {fetchData} from "./Request/Requests";
 
 export default function App() {
 
     const [plantes, setPlantes] = useState([]);
     
-    //get plantes from DB and set them into state
+    //get plantes from DB and set them into state at mount
     useEffect(() => {
-        Requests.fetchData('/vegetables', res => setPlantes(res));
+        fetchData('/vegetables', res => setPlantes(res));
     }, []);
 
     return (
@@ -22,12 +23,15 @@ export default function App() {
             <div>
             </div>
             <BrowserRouter>
+                
+                {/*Always there*/}
                 <ul>
                     <li><Link to="/">Accueil</Link></li>
                     <li><Link to="/plantes/ajouter">Ajouter plante</Link></li>
                     <li><Link to="/composition">Mes compositions</Link></li>
                 </ul>
 
+                {/*Switching*/}
                 <Switch>
                     <Route path="/composition">
                         <CompositionPlanteGeneral plantes={plantes}/>
@@ -37,14 +41,18 @@ export default function App() {
                     </Route>
                 </Switch>
 
+                {/*Potentially accessible from anywhere*/}
                 <Route path="/plantes/ajouter">
-                    <AddPlante plantes={plantes} setPlantes={setPlantes}/>
+                    <AddPlante plantes={plantes}/>
                 </Route>
                 <Route path="/plantes/modifier/:planteId">
                     <ModifyPlante plantes={plantes} setPlantes={setPlantes}/>
                 </Route>
-                <Route path="/plante/suprimer/:planteId">
+                <Route path="/plantes/suprimer/:planteId">
                     <DeletePlanteModal plantes={plantes} setPlantes={setPlantes}/>
+                </Route>
+                <Route path="/plantes/details/:planteId">
+                    <PlanteDetails plantes={plantes}/>
                 </Route>
             </BrowserRouter>
         </div>

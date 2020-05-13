@@ -1,10 +1,23 @@
 ﻿import axios from 'axios';
-const BASE_URL = "http://localhost:1337";
+require('dotenv').config();
 
 //axios async requests handler 
-const fetchData = async (path, action) => {
-    const res = await axios(BASE_URL + path);
-    action(res.data);
+export function fetchData (path, action){
+    axios(process.env.BASE_URL + path)
+        .then(res => action(res.data))
+        .catch(err => console.log(err))
 };
 
-export default {fetchData};
+//axios async post handler 
+export function postData (path, data){
+    axios.post(process.env.BASE_URL + path, {data})
+        .then(res => console.log(data, " has been added to " + path, res))
+        .catch(err => console.log(err));
+    
+}
+
+//axios async delete handler 
+export function deleteData (path, el){
+    axios.delete(process.env.BASE_URL + path + "/" + el.id)
+        .then(res => console.log(el.name + " has been deleted", res));
+};

@@ -1,16 +1,23 @@
 ﻿import React from "react";
 import PlanteForm from "./PlanteForm";
-import {useHistory, useParams} from "react-router-dom";
+import {useParams, Link} from "react-router-dom";
 
-const ModifyPlante = ({plantes, setPlantes}) => {
-    const history = useHistory();
+/**
+ * This component allow the admin to modify an existing plant
+ * @param plantes
+ * @param onModify
+ * @returns {*}
+ * @constructor
+ */
+const ModifyPlante = ({plantes, onModify}) => {
     let {planteId} = useParams();
     let nomPlante = plantes.find(plante => plante.id === parseInt(planteId)).name;
+    
     return(
         <div>
-            <a href="#" onClick={() => {history.goBack()}}>&#60;</a>
+            <Link to="/">&#60;</Link>
             <h2>Modifier {nomPlante}</h2>
-            <PlanteForm plantes={plantes} onSubmit={setPlantes}/> {/*planteToModify={plantes.find(plante => plante.id === planteId)*/}
+            <PlanteForm plantes={plantes} onSubmit={onModify}/> {/*planteToModify={plantes.find(plante => plante.id === planteId)*/}
         </div>
     );
 };
