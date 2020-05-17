@@ -15,7 +15,7 @@ export default function App() {
     
     //get plantes from DB and set them into state at mount
     useEffect(() => {
-        fetchData('/vegetables', res => setPlantes(res));
+        fetchData('/plants', res => setPlantes(res));
     }, []);
 
     return (
@@ -27,12 +27,16 @@ export default function App() {
                 {/*Always there*/}
                 <ul>
                     <li><Link to="/">Accueil</Link></li>
-                    <li><Link to="/plantes/ajouter">Ajouter plante</Link></li>
                     <li><Link to="/composition">Mes compositions</Link></li>
+                    <li><Link to="/calendrier">Calendrier</Link></li>
+                    <li><Link to="/plantes/ajouter">Ajouter une plante</Link></li>
                 </ul>
 
                 {/*Switching*/}
                 <Switch>
+                    <Route path="/calendrier">
+                        <h2>Calendrier</h2>
+                    </Route>
                     <Route path="/composition">
                         <CompositionPlanteGeneral plantes={plantes}/>
                     </Route>

@@ -11,15 +11,19 @@ import {postData} from "../Request/Requests";
  */
 const AddPlante = ({plantes}) => {
     const history = useHistory();
+    const getPlanteList = (planteNames) => {
+        return planteNames.map(name => plantes.find(plante => plante.name === name))
+    };
+    
     const onAddPlante = newPlante => {
-        console.log("newPlante:", newPlante);
-        //check if the plante we want to add doesn't already exists
         if (plantes.filter(plante => plante.name === newPlante.name.toLowerCase()).length === 0) {
+            //check if the plante we want to add doesn't already exists
+            console.log("newPlante:", newPlante);
             //TODO: failing to post correct values
             postData('/vegetables', {
                 name: newPlante.name.toLowerCase(),
-                pros: newPlante.pros,
-                cons: newPlante.cons
+                pros: getPlanteList(newPlante.pros),
+                cons: getPlanteList(newPlante.cons)
             });
             
             //once created, the router set the url back to welcome screen

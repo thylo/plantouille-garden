@@ -10,11 +10,13 @@ import PlanteList from "./PlanteList";
  * @constructor
  */
 const SearchPlante = ({plantes}) => {
-    const [search, setSearch] = useState('');
+    const [search, setSearch] = useState({name:"", plantCategory:["tous"]});
+    
     return (
         <div>
             <PlanteSearch pool={plantes} setPlanteSearch={setSearch}/>
-            <PlanteList plantes={plantes.filter(p=>p.name.includes(search))} />
+            <div>{console.log()}</div>
+            <PlanteList plantes={plantes.filter(p => p.name.includes(search.name) && (search.plantCategory.includes(p.plantCategory) || search.plantCategory.includes("tous")))} />
         </div>
     );
 };

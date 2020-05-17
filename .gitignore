@@ -3,6 +3,12 @@
 #JetBrain
 /.idea
 
+#DB
+/plantouille-db
+
+#env
+/.env
+
 # dependencies
 /package-lock.json
 /node_modules

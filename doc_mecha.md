@@ -1,0 +1,36 @@
+﻿#Répertorier une liste de plante
+- **possibilité de les catégoriser en fruit, légume, aromatique, fleur**
+-  afficher les détails de la plante
+    - nom
+    - catégorie
+    - variété
+    - photo:
+        - fleur
+        - fruit
+        - feuille
+    - calendrier: 
+        - semi
+        - plantation
+        - récolte
+        - récolte des graines
+    - Pouvoir germinatif
+    - Rusticité 
+    - Association favorable
+    - Association défavorable
+- Faire une recherche dans la liste de plante
+- Admin ajoute des plantes
+- Admin modifie des plantes
+- Admin supprime des plantes
+#Création de composition
+- Créer une composition
+    - Sélectionner plusieurs plantes parmis la liste
+    - Déterminer un nombre de rangées
+    - Lancer la génération d'une composition selon les affinités des plantes
+    - Affiche la composition
+        - affiche les éléments compatibles
+        - affiche les éléments incompatibles    
+- Exporter la composition
+    - exporte les donnés de la composition sous forme de document et la file en download à l'utilisateur
+#Consultation calendrier
+- donne le temps qu'il fait à l'utilisateur
+- donne des informations sur ce qu'il y a à faire durant les périodes de l'années en fonction des paramètre des plantes
