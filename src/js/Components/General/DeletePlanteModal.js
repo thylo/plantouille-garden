@@ -1,6 +1,6 @@
-﻿import React from "react";
+﻿﻿import React from "react";
 import {useHistory, useParams, Link} from "react-router-dom";
-import {deleteData} from "../Request/Requests";
+import {deleteData} from "../../Request/Requests";
 
 /**
  * This component allows the admin to delete a plant from the DB

@@ -1,5 +1,5 @@
-﻿import React from "react";
-import SearchPlante from "./SearchPlante";
+﻿﻿import React from "react";
+import SearchPlante from "../Common/SearchPlante";
 
 /**
  * This component is the main screen when you arrive on the app

@@ -1,5 +1,5 @@
-﻿import React, {useState} from "react";
-import SearchPlante from "./SearchPlante";
+﻿﻿import React, {useState} from "react";
+import SearchPlante from "../Common/SearchPlante";
 
 /**
  * This component display the composition panel

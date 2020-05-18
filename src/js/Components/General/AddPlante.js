@@ -1,7 +1,7 @@
-﻿import React from "react";
+﻿﻿import React from "react";
 import PlanteForm from "./PlanteForm";
 import {Link, Route, useHistory} from "react-router-dom";
-import {postData} from "../Request/Requests";
+import {postData} from "../../Request/Requests";
 
 /**
  * This component allow the admin to add a new plant to the DB
@@ -20,8 +20,9 @@ const AddPlante = ({plantes}) => {
             //check if the plante we want to add doesn't already exists
             console.log("newPlante:", newPlante);
             //TODO: failing to post correct values
-            postData('/vegetables', {
+            postData('/plants', {
                 name: newPlante.name.toLowerCase(),
+                plantCategory: newPlante.plantCategory,
                 pros: getPlanteList(newPlante.pros),
                 cons: getPlanteList(newPlante.cons)
             });

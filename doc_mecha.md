@@ -17,7 +17,7 @@
     - Rusticité 
     - Association favorable
     - Association défavorable
-- Faire une recherche dans la liste de plante
+- **Faire une recherche dans la liste de plante**
 - Admin ajoute des plantes
 - Admin modifie des plantes
 - Admin supprime des plantes
@@ -32,5 +32,5 @@
 - Exporter la composition
     - exporte les donnés de la composition sous forme de document et la file en download à l'utilisateur
 #Consultation calendrier
-- donne le temps qu'il fait à l'utilisateur
-- donne des informations sur ce qu'il y a à faire durant les périodes de l'années en fonction des paramètre des plantes
+- trier l'affichage des périodes selon une certaine plante
+- donne des informations sur ce qu'il y a à faire durant les périodes de l'années en fonction des paramètres des plantes

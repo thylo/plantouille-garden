@@ -1,11 +1,11 @@
 ﻿//initialized with "npx create-react-app"
 import React, {useState, useEffect} from "react";
-import AddPlante from './Components/AddPlante'
-import ModifyPlante from './Components/ModifyPlante'
-import CompositionPlanteGeneral from "./Components/CompositionPlante";
-import DeletePlanteModal from "./Components/DeletePlanteModal";
-import WelcomeScreen from "./Components/WelcomeScreen";
-import PlanteDetails from "./Components/PlanteDetails";
+import AddPlante from './Components/General/AddPlante'
+import ModifyPlante from './Components/General/ModifyPlante'
+import CompositionPlanteGeneral from "./Components/Composition/CompositionPlante";
+import DeletePlanteModal from "./Components/General/DeletePlanteModal";
+import WelcomeScreen from "./Components/General/WelcomeScreen";
+import PlanteDetails from "./Components/General/PlanteDetails";
 import {BrowserRouter, Link, Switch, Route} from "react-router-dom";
 import {fetchData} from "./Request/Requests";
 
