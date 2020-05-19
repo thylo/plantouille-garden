@@ -9,7 +9,7 @@ import {deleteData} from "../../Request/Requests";
  * @returns {*}
  * @constructor
  */
-const DeletePlanteModal = ({plantes, setPlantes}) => {
+const DeletePlanteModal = ({plantes, refresh}) => {
     const history = useHistory();
     let {planteId} = useParams();
     let nomPlante = plantes.find(plante => plante.id === parseInt(planteId)).name;
@@ -21,7 +21,8 @@ const DeletePlanteModal = ({plantes, setPlantes}) => {
             plantes.map((plante) => { return plante.id; }).indexOf(parseInt(planteId)), 1
         )[0];
         //send the request to the DB
-        deleteData('/vegetables', delPlante);
+        deleteData('/plants', delPlante, refresh);
+        
         //The router set back to the welcome screen
         history.push("/")
     

@@ -1,6 +1,6 @@
 ﻿#Répertorier une liste de plante
 - **possibilité de les catégoriser en fruit, légume, aromatique, fleur**
--  afficher les détails de la plante
+-  **afficher les détails de la plante**
     - nom
     - catégorie
     - variété
@@ -18,9 +18,9 @@
     - Association favorable
     - Association défavorable
 - **Faire une recherche dans la liste de plante**
-- Admin ajoute des plantes
+- **Admin ajoute des plantes**
 - Admin modifie des plantes
-- Admin supprime des plantes
+- **Admin supprime des plantes**
 #Création de composition
 - Créer une composition
     - Sélectionner plusieurs plantes parmis la liste
@@ -28,7 +28,9 @@
     - Lancer la génération d'une composition selon les affinités des plantes
     - Affiche la composition
         - affiche les éléments compatibles
-        - affiche les éléments incompatibles    
+        - affiche les éléments incompatibles
+        - afficher les éléments neutre
+        - afficher les double affinités
 - Exporter la composition
     - exporte les donnés de la composition sous forme de document et la file en download à l'utilisateur
 #Consultation calendrier

@@ -11,13 +11,13 @@ import {useParams, Link} from "react-router-dom";
  */
 const ModifyPlante = ({plantes, onModify}) => {
     let {planteId} = useParams();
-    let nomPlante = plantes.find(plante => plante.id === parseInt(planteId)).name;
+    let planteToModify = plantes.find(plante => plante.id === parseInt(planteId));
     
     return(
         <div>
             <Link to="/">&#60;</Link>
-            <h2>Modifier {nomPlante}</h2>
-            <PlanteForm plantes={plantes} onSubmit={onModify}/> {/*planteToModify={plantes.find(plante => plante.id === planteId)*/}
+            <h2>Modifier {planteToModify.name}</h2>
+            <PlanteForm plantes={plantes} onSubmit={onModify} formPlante={planteToModify}/>
         </div>
     );
 };

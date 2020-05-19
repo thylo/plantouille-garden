@@ -11,18 +11,16 @@ export function fetchData(path, action) {
 };
 
 //axios async post handler 
-export function postData(path, data) {
-    /*console.log(data);
-    axios.post(BASE_URL + path, {data: data})
-        .then(res => console.log(data, " has been added to " + "'" + path + "'", res))
-        .catch(err => console.log(err));*/
-
+export function postData(path, data, action) {
     axios({
         method: 'post',
         url: BASE_URL + path,
         data
     })
-        .then(res => console.log(data, " has been added to " + "'" + path + "'", res))
+        .then(res => {
+            action();
+            console.log(data, " has been added to " + "'" + path + "'", res);
+        })
         .catch(err => console.log(err));
 }
 
@@ -35,7 +33,13 @@ export function updateData(path, data) {
 }
 
 //axios async delete handler 
-export function deleteData(path, el) {
-    axios.delete(BASE_URL + path + "/" + el.id)
-        .then(res => console.log(el.name + " has been deleted", res));
+export function deleteData(path, el, action) {
+    axios({
+        method: "delete",
+        url: BASE_URL + path + "/" + el.id,
+    })
+        .then(res => {
+            action();
+            console.log(el.name + " has been deleted", res);
+        });
 };

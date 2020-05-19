@@ -13,13 +13,13 @@ const PlanteSearch = ({setPlanteSearch}) => {
     
     const onChanging = research => {
         console.log(research);
-        setPlanteSearch({name: research.name, plantCategory: research.plantCategory});
+        setPlanteSearch({name: research.name.toLowerCase(), plantCategory: research.plantCategory});
     };
 
     return (
         <form onChange={handleSubmit(onChanging)}>
             <label>name</label>
-            <input type="text" ref={register} name="name"/>
+            <input type="text" ref={register} name="name" placeholder="tomate"/>
             <label>Category</label>
             <select ref={register} name="plantCategory" multiple>
                 {plantCategories.map(plantCategory => {

@@ -12,10 +12,11 @@ import {fetchData} from "./Request/Requests";
 export default function App() {
 
     const [plantes, setPlantes] = useState([]);
+    const refreshPlantes = () => fetchData('/plants', res => setPlantes(res));
     
     //get plantes from DB and set them into state at mount
     useEffect(() => {
-        fetchData('/plants', res => setPlantes(res));
+        refreshPlantes()
     }, []);
 
     return (
@@ -47,13 +48,13 @@ export default function App() {
 
                 {/*Potentially accessible from anywhere*/}
                 <Route path="/plantes/ajouter">
-                    <AddPlante plantes={plantes}/>
+                    <AddPlante plantes={plantes} refresh={refreshPlantes}/>
                 </Route>
                 <Route path="/plantes/modifier/:planteId">
                     <ModifyPlante plantes={plantes} setPlantes={setPlantes}/>
                 </Route>
                 <Route path="/plantes/suprimer/:planteId">
-                    <DeletePlanteModal plantes={plantes} setPlantes={setPlantes}/>
+                    <DeletePlanteModal plantes={plantes} refresh={refreshPlantes}/>
                 </Route>
                 <Route path="/plantes/details/:planteId">
                     <PlanteDetails plantes={plantes}/>

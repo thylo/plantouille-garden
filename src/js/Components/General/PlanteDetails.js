@@ -30,16 +30,42 @@ const PlanteDetails = ({plantes}) => {
             <h2>{capitalize(planteDetails.name)}</h2>
             <h3>Categorie</h3>
             <p>{planteDetails.plantCategory}</p>
+            
             <h3>Semage</h3>
             <p>{planteDetails.seeding}</p>
+            
             <h3>Plantation</h3>
             <p>{planteDetails.planting}</p>
+            
             <h3>récolte</h3>
             <p>{planteDetails.harvest}</p>
+            
             <h3>récolte des graines</h3>
             <p>{planteDetails.seedHarvest}</p>
-            {checkNull(planteDetails.germPower, "Pouvoir germinatif")}
-            {checkNull(planteDetails.hardiness, "Rusticité")}
+            
+            <h3>Pouvoir germinatif</h3>
+            <p>{planteDetails.germPower}</p>
+            
+            <h3>Rusticité</h3>
+            <p>{planteDetails.hardiness}</p>
+            
+            <h3>Association favorables</h3>
+            <ul>
+                {planteDetails.pros.map(plante => {
+                    return(
+                        <li key={plante.id}>{plante.name}</li>
+                    )
+                })}
+            </ul>
+
+            <h3>Association défavorables</h3>
+            <ul>
+                {planteDetails.cons.map(plante => {
+                    return(
+                        <li key={plante.id}>{plante.name}</li>
+                    )
+                })}
+            </ul>
         </div>
     )
 };

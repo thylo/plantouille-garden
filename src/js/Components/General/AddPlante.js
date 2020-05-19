@@ -9,7 +9,7 @@ import {postData} from "../../Request/Requests";
  * @returns {*}
  * @constructor
  */
-const AddPlante = ({plantes}) => {
+const AddPlante = ({plantes, refresh}) => {
     const history = useHistory();
     const getPlanteList = (planteNames) => {
         return planteNames.map(name => plantes.find(plante => plante.name === name))
@@ -24,8 +24,14 @@ const AddPlante = ({plantes}) => {
                 name: newPlante.name.toLowerCase(),
                 plantCategory: newPlante.plantCategory,
                 pros: getPlanteList(newPlante.pros),
-                cons: getPlanteList(newPlante.cons)
-            });
+                cons: getPlanteList(newPlante.cons),
+                seeding: newPlante.seeding,
+                planting: newPlante.planting,
+                harvest: newPlante.harvest,
+                seedHarvest: newPlante.seedHarvest,
+                hardiness: newPlante.hardiness,
+                germPower: newPlante.germPower,
+            }, refresh);
             
             //once created, the router set the url back to welcome screen
             history.push("/");

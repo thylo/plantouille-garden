@@ -15,7 +15,6 @@ const SearchPlante = ({plantes}) => {
     return (
         <div>
             <PlanteSearch pool={plantes} setPlanteSearch={setSearch}/>
-            <div>{console.log()}</div>
             <PlanteList plantes={plantes.filter(p => p.name.includes(search.name) && (search.plantCategory.includes(p.plantCategory) || search.plantCategory.includes("tous")))} />
         </div>
     );
