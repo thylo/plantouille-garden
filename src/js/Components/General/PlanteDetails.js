@@ -1,6 +1,6 @@
 ﻿﻿import React from "react";
 import {useParams} from "react-router-dom";
-import {capitalize} from "../../Utility/Utils";
+import {capitalize, findObject} from "../../Utility/Utils";
 
 /**
  * This component shows details on the selected plant
@@ -11,19 +11,8 @@ import {capitalize} from "../../Utility/Utils";
 
 //TODO: problem when details are displayed and the user refresh cause react to crash
 const PlanteDetails = ({plantes}) => {
-    const {planteId} = useParams();
-    const checkNull = (prop, title) => {
-        if(prop != null){
-            return(
-                <div>
-                    <h3>{title}</h3>
-                    <p>{prop}</p>
-                </div>
-            );
-        }    
-    };
-    
-    let planteDetails = plantes.find(plante => plante.id === parseInt(planteId));
+    const {planteId} = useParams();    
+    let planteDetails = findObject(plantes, "id", parseInt(planteId));
     
     return(
         <div>

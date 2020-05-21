@@ -28,7 +28,7 @@ export default function App() {
                 {/*Always there*/}
                 <ul>
                     <li><Link to="/">Accueil</Link></li>
-                    <li><Link to="/composition">Mes compositions</Link></li>
+                    <li><Link to="/composition">Créer composition</Link></li>
                     <li><Link to="/calendrier">Calendrier</Link></li>
                     <li><Link to="/plantes/ajouter">Ajouter une plante</Link></li>
                 </ul>
@@ -51,7 +51,7 @@ export default function App() {
                     <AddPlante plantes={plantes} refresh={refreshPlantes}/>
                 </Route>
                 <Route path="/plantes/modifier/:planteId">
-                    <ModifyPlante plantes={plantes} setPlantes={setPlantes}/>
+                    <ModifyPlante plantes={plantes} refresh={refreshPlantes}/>
                 </Route>
                 <Route path="/plantes/suprimer/:planteId">
                     <DeletePlanteModal plantes={plantes} refresh={refreshPlantes}/>

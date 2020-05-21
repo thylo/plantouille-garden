@@ -19,7 +19,6 @@ const AddPlante = ({plantes, refresh}) => {
         if (plantes.filter(plante => plante.name === newPlante.name.toLowerCase()).length === 0) {
             //check if the plante we want to add doesn't already exists
             console.log("newPlante:", newPlante);
-            //TODO: failing to post correct values
             postData('/plants', {
                 name: newPlante.name.toLowerCase(),
                 plantCategory: newPlante.plantCategory,

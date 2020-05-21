@@ -38,7 +38,7 @@ const PlanteForm = ({plantes, onSubmit, formPlante}) => {
                     {
                         plantes.map(plante => {
                             return (
-                                <option key={plante.id} selected={formPlante != null ? formPlante.pros.find(p => p.name === plante.name).includes(plante.name) : false} value={plante.name}>
+                                <option key={plante.id} selected={formPlante != null ? true : false} value={plante.name}>
                                     {capitalize(plante.name)}
                                 </option>
                             )

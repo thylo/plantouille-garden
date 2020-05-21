@@ -1,20 +1,17 @@
 ﻿import axios from 'axios';
-//require('dotenv').config();
-
-const BASE_URL = "http://localhost:1337";
 
 //axios async requests handler 
-export function fetchData(path, action) {
-    axios(BASE_URL + path)
+export const fetchData = (path, action) => {
+    axios(process.env.﻿REACT_APP_BASE_URL + path)
         .then(res => action(res.data))
         .catch(err => console.log(err))
 };
 
 //axios async post handler 
-export function postData(path, data, action) {
+export const postData = (path, data, action) => {
     axios({
         method: 'post',
-        url: BASE_URL + path,
+        url: process.env.﻿REACT_APP_BASE_URL + path,
         data
     })
         .then(res => {
@@ -22,21 +19,27 @@ export function postData(path, data, action) {
             console.log(data, " has been added to " + "'" + path + "'", res);
         })
         .catch(err => console.log(err));
-}
+};
 
 //axios async update handler 
-export function updateData(path, data) {
-    axios.put(BASE_URL + path, {data})
-        .then(res => console.log(data, " has been added to " + "'" + path + "'", res))
+export const updateData = (path, id, data, action) => {
+    axios({
+        method: 'put',
+        url: `${process.env.﻿REACT_APP_BASE_URL + path}/${id}`,
+        data
+    })
+        .then(res => {
+            action();
+            console.log(data, " has been updated in " + "'" + path + "'", res);
+        })
         .catch(err => console.log(err));
-
-}
+};
 
 //axios async delete handler 
-export function deleteData(path, el, action) {
+export const deleteData = (path, el, action) => {
     axios({
         method: "delete",
-        url: BASE_URL + path + "/" + el.id,
+        url: `${process.env.﻿REACT_APP_BASE_URL + path}/${el.id}`,
     })
         .then(res => {
             action();

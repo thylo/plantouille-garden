@@ -7,7 +7,7 @@
 /plantouille-db
 
 #env
-/.env
+.env
 
 # dependencies
 /package-lock.json
