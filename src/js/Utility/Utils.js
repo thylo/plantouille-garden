@@ -19,7 +19,7 @@ export const getElementList = (pool, element, prop) => {
 //get an object from an object list
 export const findObject = (pool, prop, search) => {
     if (typeof prop === "string") {
-        return pool.find(plante => plante[prop] === search);
+        return pool.find(el => el[prop] === search);
     } else {
         console.log("Utils > findObject ERROR: 'prop': ", prop, "is not of type 'string'");
         return [];
@@ -40,9 +40,39 @@ export const arrObj2prop = (arr, prop) => {
     }
 };
 
-/**
- * Returns a random number between min (inclusive) and max (exclusive)
- */
+// Returns a random number between min (inclusive) and max (exclusive)
 export const getRandomInt = (min, max) => {
     return Math.floor(Math.random() * (max - min) + min);
-}
+};
+
+// Check which elementfrom an array go into another, based on a property
+export const arrayMult = (targetArr, TestArr, prop) => {
+    let multipliedArray = [];
+    //convert selection array obj to property based array
+    const str_selected = arrObj2prop(TestArr, prop);
+    //generate the multiplied array
+    targetArr.forEach(p => {
+            if (str_selected.indexOf(p[prop]) >= 0) {
+                multipliedArray.push(findObject(targetArr, prop, p[prop]));
+            }
+        }
+    );
+
+    return multipliedArray;
+};
+
+// Check which elementfrom an array go into another, based on a property
+export const arrayDivide = (targetArr, TestArr, prop) => {
+    let multipliedArray = [];
+    //convert selection array obj to property based array
+    const str_selected = arrObj2prop(TestArr, prop);
+    //generate the multiplied array
+    targetArr.forEach(p => {
+            if (str_selected.indexOf(p[prop]) < 0) {
+                multipliedArray.push(findObject(targetArr, prop, p[prop]));
+            }
+        }
+    );
+
+    return multipliedArray;
+};
