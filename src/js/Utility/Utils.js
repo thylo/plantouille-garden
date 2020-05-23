@@ -61,7 +61,7 @@ export const arrayMult = (targetArr, TestArr, prop) => {
     return multipliedArray;
 };
 
-// Check which elementfrom an array go into another, based on a property
+// Check which element from an test array go into a target array, based on a property
 export const arrayDivide = (targetArr, TestArr, prop) => {
     let multipliedArray = [];
     //convert selection array obj to property based array
@@ -75,4 +75,16 @@ export const arrayDivide = (targetArr, TestArr, prop) => {
     );
 
     return multipliedArray;
+};
+
+// array A - array B, based on property
+export const arraySubstract = (arrA, arrB, prop) => {
+    let substractedArray = [...arrA];
+    arrB.forEach(el => {
+        if(substractedArray.length > 0 && findObject(substractedArray, prop, el[prop]) != null){
+            substractedArray.splice(arrObj2prop(substractedArray, prop).indexOf(el[prop]), 1);
+        }
+    });
+    
+    return substractedArray;
 };
