@@ -11,33 +11,17 @@ import Select from "react-select";
 const CompositionPlante = ({plantes}) => {
     const [selectedPlantes, setSelectedPlantes] = useState([]);
     const [compositions, setCompositions] = useState([]);
+    const [bests, setBests] = useState([]);
     const [compAreCreated, setCompAreCreated] = useState(false);
     const [generating, setGenerating] = useState(false);
+    const [displayLimit, setDisplayLimit] = useState(10);
 
     const selectOptions = plantes.map(plante => {
         return {label: capitalize(plante.name), value: plante.name}
     });
     
-    const orderByLength = e => {
-        setCompositions([...compositions.sort((a, b) => a.length > b.length ? -1 : a.length > b.length ? 1 : 0)]);
-    };
-
-    const orderByAffinity = e => {
-        setCompositions([...compositions.sort((a, b) => {
-            let testA = a.reduce((acc, curr) => acc + curr.level);
-            let testB = b.reduce((acc, curr) => acc + curr.level);
-            if(testA > testB){
-                return -1
-            }
-            
-            else if(testA < testB){
-                return 1;
-            }
-            
-            else{
-                return 0;
-            }
-        })]);
+    const showMore = () => {
+        setDisplayLimit(displayLimit + 100);
     };
 
     //Prepare an excludelist of elements based
@@ -140,6 +124,7 @@ const CompositionPlante = ({plantes}) => {
         e.preventDefault();
 
         //reset the state to prevent error
+        setDisplayLimit(10);
         setCompositions([]);
         setCompAreCreated(false);
         setGenerating(true);
@@ -161,13 +146,46 @@ const CompositionPlante = ({plantes}) => {
                 total: arr_obj_plantes
             }, branch, arr_obj_plantes, accumulator);
 
-            return accumulator;
+            accumulator.sort((a, b) => a.length > b.length ? -1 : a.length < b.length ? 1 : 0);
+            let tmp = [];
+            let result = [];
+            accumulator.forEach(el => {
+                if (el.length === accumulator[0].length){
+                    tmp.push(el);
+                }
+            });
+            
+            tmp.sort((a, b) => {
+                let lvlA = a.reduce((acc, curr) => acc + curr.level, 0);
+                let lvlB = b.reduce((acc, curr) => acc + curr.level, 0);
+                if (lvlA > lvlB){
+                    return -1;
+                }
+                
+                else if (lvlA < lvlB){
+                    return 1;
+                }
+                
+                else {
+                    return 0;
+                }
+            });
+            const upperAffinity = tmp[0].reduce((acc, curr) => acc + curr.level, 0);
+            console.log(upperAffinity);
+            tmp.forEach(el => {
+                if (el.reduce((acc, curr) => acc + curr.level, 0) === upperAffinity){
+                    result.push(el);
+                }
+            });
+            console.log(result);
+            return {general: accumulator, best: result};
         }
     };
 
     const launchComp = async (e) => {
         generateComp(e).then(res => {
-            setCompositions([...res]);
+            setCompositions([...res.general]);
+            setBests([...res.best]);
             setCompAreCreated(true);
             setGenerating(false);
         })
@@ -181,42 +199,42 @@ const CompositionPlante = ({plantes}) => {
                 <button>Générer</button>
             </form>
             
-            <h3>Trier par</h3>
-            <form>
-                <label>Taille de composition</label>
-                <input type="checkbox" onChange={orderByLength}/>
-                
-                <label>Affinité</label>
-                <input type="checkbox" onChange={orderByAffinity}/>
-            </form>
+            <h3>Légende:</h3>
+            <ul className="legend">
+                <li className="darkGreen">Affinité faible</li>
+                <li className="mediumGreen">Affinité forte</li>
+                <li className="lightGreen">Affinité très forte</li>
+            </ul>
+            
             <ul>
                 {compAreCreated ?
                     <p>{compositions.length} {compositions.length > 1 ? "compositions générées" : "composition générée"} </p> : ""}
+                {compAreCreated ? <p>{`Voici ${bests.length > 1 ? `les ${bests.length}` : "le"}  meilleur${bests.length > 1 ? "s" : ""} résultat${bests.length > 1 ? "s" : ""}`}</p> : ""}
                 {compAreCreated ?
-                    compositions.map(comp => {
+                    bests.filter(comp => bests.indexOf(comp) < displayLimit).map(comp => {
                         return (
                             <li>
-                                <ul style={{
-                                    display: 'flex',
-                                    flexDirection: 'row'
-                                }}>
+                                <ol className="composition">
                                     {comp.map(item => {
                                         return (
-                                            <li style={{
+                                            <li className="compItem" style={{
                                                 display: 'block',
-                                                backgroundColor: `rgb(${150 / item.level}, ${255 / item.level}, ${150 / item.level})`,
+                                                color: `${item.level === 1 ? '#fff' : '#000'}`,
+                                                backgroundColor: `rgb(${50 * item.level}, ${85 * item.level}, ${50 * item.level})`,
                                                 padding: '1.5rem'
                                             }}>
                                                 {item.plant.name} {item.level}
                                             </li>
                                         )
                                     })}
-                                </ul>
+                                </ol>
                             </li>
                         )
                     }) : generating ? <p>Génération en cours...</p> : ""
                 }
+                
             </ul>
+            {compAreCreated && bests.length > displayLimit ? <button onClick={showMore}>Voir plus</button> : ""}
         </div>
     );
 };

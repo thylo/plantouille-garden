@@ -1,4 +1,4 @@
-﻿﻿import React from "react";
+﻿﻿import React, {useState} from "react";
 import PlanteForm from "./PlanteForm";
 import {Link, Route, useHistory} from "react-router-dom";
 import {postData} from "../../Request/Requests";
@@ -11,12 +11,14 @@ import {postData} from "../../Request/Requests";
  */
 const AddPlante = ({plantes, refresh}) => {
     const history = useHistory();
+    const [error, setError] = useState("");
     const getPlanteList = (planteNames) => {
         return planteNames.map(name => plantes.find(plante => plante.name === name))
     };
     
     const onAddPlante = newPlante => {
         if (plantes.filter(plante => plante.name === newPlante.name.toLowerCase()).length === 0) {
+            setError("");
             //check if the plante we want to add doesn't already exists
             console.log("newPlante:", newPlante);
             postData('/plants', {
@@ -36,6 +38,7 @@ const AddPlante = ({plantes, refresh}) => {
             history.push("/");
         } else {
             //TODO: display a message as the plant already exists
+            setError(`La plante \'${newPlante.name.toLowerCase()}\' existe déjà`);
             console.log("La plante existe déjà");
         }
     };
@@ -44,7 +47,7 @@ const AddPlante = ({plantes, refresh}) => {
         <Route path="/plantes/ajouter">
             <Link to="/">&#60;</Link>
             <h2>Ajouter plante</h2>
-            <PlanteForm plantes={plantes} onSubmit={onAddPlante}/>
+            <PlanteForm plantes={plantes} onSubmit={onAddPlante} error={error}/>
         </Route>
     )
 };

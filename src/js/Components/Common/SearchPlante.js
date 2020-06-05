@@ -1,4 +1,7 @@
-﻿﻿import React, {useState} from "react";
+﻿import PlanteDetails from "../General/PlanteDetails";
+import {Route} from "react-router-dom";
+
+﻿import React, {useState} from "react";
 import PlanteSearch from "./PlanteSearch";
 import PlanteList from "./PlanteList";
 
@@ -13,9 +16,15 @@ const SearchPlante = ({plantes}) => {
     const [search, setSearch] = useState({name:"", plantCategory:["tous"]});
     
     return (
-        <div>
-            <PlanteSearch pool={plantes} setPlanteSearch={setSearch}/>
-            <PlanteList plantes={plantes.filter(p => p.name.includes(search.name) && (search.plantCategory.includes(p.plantCategory) || search.plantCategory.includes("tous")))}/>
+        <div className="planteList_co">
+            <div>
+                <h3>Recherche</h3>
+                <PlanteSearch pool={plantes} setPlanteSearch={setSearch}/>
+                <PlanteList plantes={plantes.filter(p => p.name.includes(search.name) && (search.plantCategory.includes(p.plantCategory) || search.plantCategory.includes("tous")))}/>
+            </div>
+            <Route path="/plantes/details/:planteId">
+                <PlanteDetails plantes={plantes}/>
+            </Route>
         </div>
     );
 };

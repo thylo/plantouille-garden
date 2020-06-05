@@ -1,5 +1,4 @@
 ﻿import {capitalize} from "../../Utility/Utils";
-
 ﻿import React from "react";
 import {Link} from "react-router-dom";
 
@@ -11,13 +10,25 @@ import {Link} from "react-router-dom";
  */
 const PlanteList = ({plantes}) => {
     return (
-        <ul>
-            {plantes.map(plante => {
+        <ul className="plantList">
+            {plantes.sort((a, b) => {
+                if(a.name > b.name){
+                    return 1;
+                }
+                
+                else if(a.name < b.name){
+                    return -1;
+                }
+                
+                else{
+                    return 0;
+                }
+            }).map(plante => {
                 return (
-                    <li key={plante.id}>
-                        <Link to={`/plantes/details/${plante.id}`}>{capitalize(plante.name)}</Link>
-                        <Link to={`/plantes/modifier/${plante.id}`}> Modifier</Link>
-                        <Link to={`/plantes/suprimer/${plante.id}`}> Supprimer</Link>
+                    <li className="plantList__item" key={plante.id}>
+                        <Link className="plantList__link" to={`/plantes/details/${plante.id}`}>{capitalize(plante.name)}</Link>
+                        <Link className="plantList__link" to={`/plantes/modifier/${plante.id}`}> Modifier</Link>
+                        <Link className="plantList__link" to={`/plantes/suprimer/${plante.id}`}> Supprimer</Link>
                     </li>
                 )
             })}

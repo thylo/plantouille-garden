@@ -9,7 +9,7 @@ import {useForm} from "react-hook-form";
  * @returns {*}
  * @constructor
  */
-const PlanteForm = ({plantes, onSubmit, formPlante}) => {
+const PlanteForm = ({plantes, onSubmit, formPlante, error}) => {
     const {register, handleSubmit} = useForm();
 
     return (
@@ -62,35 +62,37 @@ const PlanteForm = ({plantes, onSubmit, formPlante}) => {
                 </select>
             </div>
 
-            <div>
+            <div className="formModule">
                 <label>Date d'ensemencement</label>
                 <input required ref={register} defaultValue={formPlante != null ? formPlante.seeding : ""} name="seeding" type="date"/>
             </div>
 
-            <div>
+            <div className="formModule">
                 <label>Date de plantation</label>
                 <input required ref={register} defaultValue={formPlante != null ? formPlante.planting : ""} name="planting" type="date"/>
             </div>
 
-            <div>
+            <div className="formModule">
                 <label>Date de récolte</label>
                 <input required ref={register} defaultValue={formPlante != null ? formPlante.harvest : ""} name="harvest" type="date"/>
             </div>
 
-            <div>
+            <div className="formModule">
                 <label>Date de récolte des graines</label>
                 <input required ref={register} defaultValue={formPlante != null ? formPlante.seedHarvest : ""} name="seedHarvest" type="date"/>
             </div>
 
-            <div>
+            <div className="formModule">
                 <label>Rusticité</label>
-                <input required ref={register} defaultValue={formPlante != null ? formPlante.hardiness : ""} name="hardiness" type="number"/> <label>°C</label>
+                <input required ref={register} defaultValue={formPlante != null ? formPlante.hardiness : ""} name="hardiness" type="number"/> <span>°C</span>
             </div>
 
-            <div>
+            <div className="formModule">
                 <label>Pouvoir germinatif</label>
-                <input required ref={register} defaultValue={formPlante != null ? formPlante.germPower : ""} name="germPower" type="number" min="0"/> <label>ans</label>
+                <input required ref={register} defaultValue={formPlante != null ? formPlante.germPower : ""} name="germPower" type="number" min="0"/> <span>ans</span>
             </div>
+            
+            {error != null ? error.length > 0 ? <p className="error">{error}</p> : "" : ""}
 
             <button>Confirmer</button>
         </form>

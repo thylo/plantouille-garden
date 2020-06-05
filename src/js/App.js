@@ -26,11 +26,11 @@ export default function App() {
             <BrowserRouter>
                 
                 {/*Always there*/}
-                <ul>
-                    <li><Link to="/">Accueil</Link></li>
-                    <li><Link to="/composition">Créer composition</Link></li>
-                    <li><Link to="/calendrier">Calendrier</Link></li>
-                    <li><Link to="/plantes/ajouter">Ajouter une plante</Link></li>
+                <ul className="mainnav">
+                    <li className="nav__item"><Link to="/" className="nav__link">Accueil</Link></li>
+                    <li className="nav__item"><Link to="/composition" className="nav__link">Créer composition</Link></li>
+                    <li className="nav__item"><Link to="/calendrier" className="nav__link">Calendrier</Link></li>
+                    <li className="nav__item"><Link to="/plantes/ajouter" className="nav__link">Ajouter une plante</Link></li>
                 </ul>
 
                 {/*Switching*/}
@@ -55,9 +55,6 @@ export default function App() {
                 </Route>
                 <Route path="/plantes/suprimer/:planteId">
                     <DeletePlanteModal plantes={plantes} refresh={refreshPlantes}/>
-                </Route>
-                <Route path="/plantes/details/:planteId">
-                    <PlanteDetails plantes={plantes}/>
                 </Route>
             </BrowserRouter>
         </div>
