@@ -12,7 +12,7 @@ import {fetchData} from "./Request/Requests";
 export default function App() {
 
     const [plantes, setPlantes] = useState([]);
-    const refreshPlantes = () => fetchData('/plants', res => setPlantes(res));
+    const refreshPlantes = () => fetchData('/plants', setPlantes);
     
     //get plantes from DB and set them into state at mount
     useEffect(() => {
