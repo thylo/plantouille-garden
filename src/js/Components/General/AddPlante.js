@@ -12,9 +12,7 @@ import {postData} from "../../Request/Requests";
 const AddPlante = ({plantes, refresh}) => {
     const history = useHistory();
     const [error, setError] = useState("");
-    const getPlanteList = (planteNames) => {
-        return planteNames.map(name => plantes.find(plante => plante.name === name))
-    };
+    const getPlanteList = (planteNames) => planteNames.map(name => plantes.find(plante => plante.name === name));
     
     const onAddPlante = newPlante => {
         if (plantes.filter(plante => plante.name === newPlante.name.toLowerCase()).length === 0) {
