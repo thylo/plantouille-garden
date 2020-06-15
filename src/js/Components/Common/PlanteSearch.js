@@ -1,6 +1,8 @@
 ﻿﻿import React from "react";
 import {useForm} from "react-hook-form";
 
+const plantCategories = ["tous", "arbre", "aromatique", "buisson", "fleur", "fruit", "legume", "racine"];
+
 /**
  * This component is a search bar for the plant list
  * @param setPlanteSearch
@@ -9,7 +11,6 @@ import {useForm} from "react-hook-form";
  */
 const PlanteSearch = ({setPlanteSearch}) => {
     const {register, handleSubmit} = useForm();
-    const plantCategories = ["tous", "arbre", "aromatique", "buisson", "fleur", "fruit", "legume", "racine"];
     
     const onChanging = research => {
         setPlanteSearch({name: research.name.toLowerCase(), plantCategory: research.plantCategory});
